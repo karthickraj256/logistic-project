@@ -1,0 +1,120 @@
+.table-card {
+    background: #FFFFFF;
+    border: 1px solid #D5D5D5;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    width: calc(100vw - 300px);
+}
+
+/* scroll container for table */
+.table-wrap {
+    width: 100%;
+    overflow: scroll;
+
+    table {
+        border-collapse: separate;
+        /* so sticky columns don't clip */
+        border-spacing: 0;
+        width: 100%;
+        min-width: 900px;
+        /* demonstrate horizontal scrolling */
+        table-layout: fixed;
+        /* columns will use width from first row */
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #FCFDFD;
+            z-index: 4;
+            padding: 14px 12px;
+            border-bottom: 1px solid #D5D5D5;
+
+            .header-content {
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-weight: 600;
+                white-space: nowrap;
+                color: #202224;
+                font-size: 14px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .sort-icon {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+
+        tbody td {
+            padding: 0px 12px;
+            border-bottom: 1px solid #D5D5D5;
+
+            .col {
+                min-height: 52px;
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                color: #202224;
+                font-size: 14px;
+                font-weight: 500;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+            }
+        }
+
+
+        /* sticky first column */
+        th:first-child,
+        td:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 6;
+            /* on top of normal header/body */
+            background: #FCFDFD;
+            border-right: 1px solid #D5D5D5;
+        }
+
+        /* make header of first column above the other header cells */
+        thead th:first-child {
+            z-index: 8;
+        }
+
+        /* sticky last column */
+        th:last-child,
+        td:last-child {
+            position: sticky;
+            right: 0;
+            z-index: 6;
+            background: linear-gradient(270deg, #ffffff, #fbfdff);
+            border-left: 1px solid #D5D5D5;
+            text-align: right;
+        }
+
+        thead th:last-child {
+            z-index: 8;
+        }
+    }
+}
+
+@media (max-width:640px) {
+    :root {
+        --row-height: 48px
+    }
+
+    table {
+        min-width: 700px
+    }
+
+    thead th,
+    tbody td {
+        padding: 10px 8px
+    }
+}

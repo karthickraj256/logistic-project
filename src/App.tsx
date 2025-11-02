@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "@fontsource/nunito-sans"; // default 400
+import "@fontsource/nunito-sans/600.css"; // specific weight
+
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// admin pages
+import Layout from "./admin/pages/layout";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" element={<>Web Side</>} />
+          <Route path="/admin/*" element={<Layout />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

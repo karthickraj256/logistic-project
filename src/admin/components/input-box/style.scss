@@ -1,0 +1,117 @@
+.input-box-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+
+    .input-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #ADADAD;
+
+        display: flex;
+        gap: 3px;
+
+        span {
+            color: #FF4D4F;
+        }
+    }
+
+    .input-box {
+        border: 1px solid #D5D5D5;
+        border-radius: 4px;
+        max-width: 360px;
+        min-width: 100px;
+        height: 36px;
+        background-color: #F5F6FA;
+        padding: 0px 12px;
+
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        &.textarea {
+            height: auto;
+            padding: 12px;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            height: 100%;
+            flex: 1;
+            background-color: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .6px;
+            color: #202224;
+
+            &::placeholder {
+                color: #A6A6A6;
+                font-weight: 400;
+            }
+        }
+
+        textarea {
+            border: none;
+            outline: none;
+            height: 187px;
+            flex: 1;
+            background-color: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .6px;
+            color: #202224;
+
+            &::placeholder {
+                color: #A6A6A6;
+                font-weight: 400;
+            }
+        }
+
+        .input-icon {
+            display: flex;
+        }
+
+        .number-input-arrows {
+            display: flex;
+            align-items: center;
+
+            .input-icon {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .autocompleted-container {
+        position: absolute;
+        z-index: 9;
+        width: 100%;
+        background-color: #FFFFFF;
+        border: solid 0.3px #B9B9B9;
+        border-radius: 4px;
+        overflow: hidden;
+        overflow-y: scroll;
+        // height: 0px;
+        // opacity: 0;
+        max-height: 300px;
+
+        .autocompleted-item-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .autocompleted-item {
+                color: #404040;
+                font-size: 14px;
+                font-weight: 400;
+                cursor: pointer;
+                padding: 5px 10px;
+
+                &:hover {
+                    background-color: darken(#F5F6FA, 5%);
+                }
+            }
+        }
+    }
+}

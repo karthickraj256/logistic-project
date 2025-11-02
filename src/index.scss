@@ -1,0 +1,25 @@
+@import './scss/settings/variables.scss';
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+@import './scss/App.scss';
+
+// admin pages
+@import './admin/pages/layout/style.scss';
+@import './admin/pages/dashboard/style.scss';
+
+// admin components
+@import './admin/components/header/style.scss';
+@import './admin/components/search-input-box/style.scss';
+@import './admin/components/input-box/style.scss';
+@import './admin/components/notification-dropdown/style.scss';
+@import './admin/components/language-dropdown/style.scss';
+@import './admin/components/profile-dropdown/style.scss';
+@import './admin/components/sidebar/style.scss';
+@import './admin/components/header-title/style.scss';
+@import './admin/components/date-input-box/style.scss';
+@import './admin/components/data-table/style.scss';
+@import './admin/components/botton/style.scss';
+@import './admin//components/filter-dropdown/style.scss';

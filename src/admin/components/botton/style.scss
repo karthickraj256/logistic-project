@@ -1,0 +1,58 @@
+.button-wrap {
+    .button {
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0px 16px;
+
+        &.primary-button {
+            background: #5339eb;
+            color: #fff;
+
+            &:hover {
+                background: #3018b9;
+            }
+        }
+
+        &.success-button {
+            background: #27AE60;
+            color: #fff;
+
+            &:hover {
+                background: #13974c;
+            }
+        }
+
+        &.danger-button {
+            background: #EB5757;
+            color: #fff;
+
+            &:hover {
+                background: #bb1b1b;
+            }
+        }
+
+        &.default-button {
+            background: #F2F2F2;
+            color: #333333;
+            border: solid .75px #333333;
+
+            &:hover {
+                background: #adacac;
+            }
+        }
+
+        &.warning-button {
+            background: #F2994A;
+            color: #fff;
+
+            &:hover {
+                background: #c06016;
+            }
+        }
+    }
+}

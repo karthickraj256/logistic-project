@@ -1,0 +1,101 @@
+.dashboard-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .dashboard-header {
+        .header-left {}
+    }
+
+    .dashboard-body {
+        .dashboard-content {
+            display: flex;
+            gap: 24px;
+            flex-direction: column;
+
+            .dashboard-cards-list {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+
+                .dashboard-card {
+                    flex: 1;
+                    background-color: #ffffff;
+                    border: 1px solid #eeeeee;
+                    border-radius: 8px;
+                    padding: 16px;
+                    margin-bottom: 16px;
+
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+
+                    .card-content {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        flex: 1;
+
+                        .card-title {
+                            font-size: 16px;
+                            color: #202224;
+                        }
+
+                        .card-value {
+                            font-size: 28px;
+                            font-weight: 700;
+                            color: #202224;
+                        }
+                    }
+
+                    .card-icon {}
+
+                    .card-message {
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+
+                        .message {
+                            display: flex;
+                            align-items: center;
+                            gap: 4px;
+
+                            span {
+                                display: flex;
+                                align-items: center;
+                                gap: 4px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1365px) {
+    .dashboard-wrap {
+        .dashboard-header {
+            .header-left {}
+        }
+        .dashboard-body {
+            .dashboard-content {
+                .dashboard-cards-list {
+                    grid-template-columns: repeat(2, 1fr);
+                    .dashboard-card {
+                        .card-content {
+                            .card-title {}
+                            .card-value {}
+                        }
+                        .card-icon {}
+                        .card-message {
+                            .message {
+                                span {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

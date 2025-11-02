@@ -1,0 +1,77 @@
+.admin-sidebar-wrap {
+    .admin-sidebar-header {
+        display: flex;
+        height: 70px;
+        align-items: center;
+        justify-content: center;
+
+        .logo {
+            width: 108px;
+            height: 24px;
+        }
+    }
+
+    .admin-sidebar-body {
+        .admin-sidebar-content {
+            .sidebar-content-session {
+                display: flex;
+                flex-direction: column;
+                padding: 20px 0px;
+
+                .sidebar-menu-item {
+                    display: flex;
+                    flex-direction: row;
+                    flex: 1;
+                    padding: 0px 31px;
+                    align-items: center;
+                    position: relative;
+
+                    .sidebar-menu {
+                        display: flex;
+                        flex-direction: row;
+                        gap: 14px;
+                        align-items: center;
+                        flex: 1;
+                        cursor: pointer;
+                        height: 50px;
+                        padding: 0px 16px;
+                        border-radius: 6px;
+
+                        .menu-icon {
+                            display: flex;
+                        }
+
+                        .menu-text {
+                            font-size: 14px;
+                            color: #202224;
+                        }
+
+                        &.active {
+                            background-color: #4880FF;
+
+                            .menu-icon svg path {
+                                fill: #FFFFFF;
+                            }
+
+                            .menu-text {
+                                color: #FFFFFF;
+                            }
+
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                bottom: 0;
+                                width: 6px;
+                                border-radius: 0px 6px 6px 0px;
+                                background-color: #4880FF;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

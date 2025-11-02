@@ -1,0 +1,25 @@
+.admin-header-wrap {
+    background-color: #ffffff;
+    height: 70px;
+    padding: 0px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .admin-header-left {
+        display: flex;
+        gap: 16px;
+
+        .admin-header-icon {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+
+    .admin-header-right {
+        display: flex;
+        gap: 24px;
+    }
+}
