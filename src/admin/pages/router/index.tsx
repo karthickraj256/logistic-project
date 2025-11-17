@@ -8,7 +8,7 @@ function AppRouter() {
   return (
     <Routes>
       <Route path="dashboard" element={<Dashboard />} />
-      <Route path="consumer" element={<Consumer />} />
+      <Route path="customer" element={<Consumer />} />
     </Routes>
   );
 }

@@ -18,14 +18,26 @@ import {
   PercentageDownIcon,
   PercentageUpIcon,
 } from "../../../assets/icons/color-svg";
-import { SearchIconInput } from "../../../assets/icons/normal-svg";
+import {
+  DashboardIcon,
+  SearchIconInput,
+} from "../../../assets/icons/normal-svg";
 import usersList from "../../../assets/json/admin/users.json";
 import usersLists from "../../../assets/json/admin/userlist.json";
 import Button from "../../components/botton";
 import FilterDropDown from "../../components/filter-dropdown";
+import TableColumnDropDown from "../../components/table-column-dropdown";
+import ExportButtonDropDown from "../../components/export-button-dropdown";
+import MoreButtonDropDown from "../../components/more-button-dropdown";
+import DateRangeInputBox from "../../components/date-range-input-box";
+import ModalBox from "../../components/modal-box";
+import TabMenus from "../../components/tab-menus";
 
 function Dashboard() {
-  const [values, setValues] = useState<any>({});
+  const [values, setValues] = useState<any>({
+    firstName: "",
+  });
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleChange = (name: string, value: string | number) => {
     setValues((prevValues: any) => ({
@@ -41,16 +53,40 @@ function Dashboard() {
     }));
   };
 
+  const moreButton = [
+    {
+      label: "Edit",
+      icon: <DashboardIcon />,
+      function: () => {},
+      component: <div>Edit Button UI</div>,
+    },
+    {
+      label: "View",
+      icon: <DashboardIcon />,
+      function: () => {},
+    },
+    {
+      label: "Delete",
+      icon: <DashboardIcon />,
+      function: () => {},
+    },
+  ];
+
   const header = [
     {
       name: "First Name",
       key: "firstName",
       width: "100px",
+      headerCall: () => (
+        <div>
+          <div>First Name Div</div>
+        </div>
+      ),
       Call: (value: any) => (
         <div>
           <div>{value.firstName}</div>
         </div>
-      )
+      ),
     },
     {
       name: "First Name",
@@ -169,9 +205,12 @@ function Dashboard() {
       width: "100px",
     },
     {
-      name: "First Name",
+      name: "Action",
       key: "firstName",
       width: "100px",
+      Call: (value: any) => (
+        <MoreButtonDropDown buttonList={moreButton} value={String(value)} />
+      ),
     },
   ];
 
@@ -198,11 +237,17 @@ function Dashboard() {
       placeholder: "Select Filter 3",
       type: "date" as "date",
     },
-  ]
-
+  ];
 
   return (
     <div className="dashboard-wrap">
+      <ModalBox
+        openStatus={modalOpen}
+        content={<div>Hi</div>}
+        title="Modal box"
+        header={true}
+        closeFunction={() => setModalOpen(!modalOpen)}
+      />
       <div className="dashboard-header">
         <div className="header-left">
           <HeaderTitle title="Dashboard" />
@@ -356,11 +401,23 @@ function Dashboard() {
               <div>
                 <DateInputBox
                   label="Input Label"
-                  name="textarea"
+                  name="date"
                   onChange={handleChange}
                   required
                   disabled={false}
-                  value={values.textarea || ""}
+                  value={values.date || ""}
+                />
+              </div>
+              <div>
+                <DateRangeInputBox
+                  label="Date Range Label"
+                  name1="startDate"
+                  name2="endDate"
+                  onChange={handleChange}
+                  required
+                  disabled={false}
+                  value1={values.startDate || ""}
+                  value2={values.endDate || ""}
                 />
               </div>
               <div>
@@ -376,16 +433,52 @@ function Dashboard() {
                   value={values.textarea || ""}
                 />
               </div>
-              <div><Button label="Submit" type="primary" onClick={() => {}} /></div>
-              <div><Button label="Submit" type="warning" onClick={() => {}} /></div>
-              <div><Button label="Submit" type="success" onClick={() => {}} /></div>
-              <div><Button label="Submit" type="danger" onClick={() => {}} /></div>
-              <div><Button label="Submit" type="default" onClick={() => {}} /></div>
-              <div><FilterDropDown filterData={filterData} onChange={handleChange} /></div>
+              <div>
+                <Button
+                  label="Submit"
+                  type="primary"
+                  onClick={() => setModalOpen(!modalOpen)}
+                />
+              </div>
+              <div>
+                <Button label="Submit" type="warning" onClick={() => {}} />
+              </div>
+              <div>
+                <Button label="Submit" type="success" onClick={() => {}} />
+              </div>
+              <div>
+                <Button label="Submit" type="danger" onClick={() => {}} />
+              </div>
+              <div>
+                <Button label="Submit" type="default" onClick={() => {}} />
+              </div>
+              <div>
+                <FilterDropDown
+                  filterData={filterData}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <TableColumnDropDown
+                  columnList={header.map((item) => ({
+                    name: item.key,
+                    label: item.name,
+                  }))}
+                  selectedKeys={header.map((item) => item.key)}
+                  onChange={() => {}}
+                />
+              </div>
+              <div>
+                <ExportButtonDropDown onClick={() => {}} />
+              </div>
+              <div>
+                <MoreButtonDropDown buttonList={moreButton} />
+              </div>
+              <div><TabMenus /></div>
             </div>
           </div>
           <div className="white-box">
-            <DataTable header={header} values={usersLists} height="30vh" />
+            <DataTable header={header} values={usersLists} />
           </div>
         </div>
       </div>

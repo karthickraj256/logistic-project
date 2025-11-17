@@ -4,11 +4,18 @@ interface ButtonInterface {
   label: string;
   onClick?: () => void;
   type?: "primary" | "success" | "danger" | "warning" | "default";
+  icon?: React.ReactNode;
 }
 function Button(props: ButtonInterface) {
-  return <div className="button-wrap">
-    <div className={`button ${props.type}-button`}>{props.label}</div>
-  </div>;
+  const { label, onClick, type, icon } = props;
+  return (
+    <div className="button-wrap" onClick={onClick}>
+      <div className={`button ${type}-button`}>
+        {icon}
+        {label}
+      </div>
+    </div>
+  );
 }
 
 export default Button;

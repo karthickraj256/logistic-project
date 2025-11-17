@@ -5,6 +5,7 @@ interface DataTableColumnInterface {
   name: string;
   key: string;
   Call?: (value: any) => React.ReactNode;
+  headerCall?: () => React.ReactNode;
   width?: string;
   sortable?: boolean;
 }
@@ -12,21 +13,20 @@ interface DataTableColumnInterface {
 interface DataTableInterface {
   header: DataTableColumnInterface[];
   values: any[];
-  height: string;
 }
 
 function DataTable(props: DataTableInterface) {
-  const { header, values, height } = props;
+  const { header, values } = props;
   return (
     <div className="table-card">
-      <div className="table-wrap" style={{ height: "450px" }}>
+      <div className="table-wrap">
         <table aria-label="Sample sticky table">
           <thead>
             <tr>
               {header.map((item: DataTableColumnInterface) => (
                 <th key={item.key} style={{ width: item.width || "auto" }}>
                   <div className="header-content">
-                    {item.name}
+                    {item.headerCall ? item.headerCall() : item.name}
 
                     {item.sortable && (
                       <span className="sort-icon">

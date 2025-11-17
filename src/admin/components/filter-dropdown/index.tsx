@@ -28,12 +28,12 @@ function FilterDropDown(props: FilterDropDownInterface) {
       ".filter-dropdown-wrap"
     );
     const totalCalender = document
-      .getElementById("calender_height")
+      .getElementById("filter_height")
       ?.getBoundingClientRect();
     if (closestInputBox) {
       const rect = closestInputBox.getBoundingClientRect();
       const newStyle: any = {
-        height: totalCalender?.height || 250,
+        height: 'auto',
         width: totalCalender?.width || 250,
         opacity: 1,
       };
@@ -70,7 +70,7 @@ function FilterDropDown(props: FilterDropDownInterface) {
       <div className="filter-button" onClick={toggleDropdown}>
         <FilterIcon />
       </div>
-      <div className="filter-dropdown" style={style} id="calender_height">
+      <div className="filter-dropdown" style={style} id="filter_height">
         <div className="filter-header">
           <div className="title">Filter Options</div>
           <div className="close-btn" onClick={() => setStyle({})}>

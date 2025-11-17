@@ -4,10 +4,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 6px;
         border-radius: 6px;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
         padding: 0px 16px;
+
+        &:hover {
+            transform: scale(1.1);
+        }
 
         &.primary-button {
             background: #5339eb;

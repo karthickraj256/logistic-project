@@ -1,0 +1,54 @@
+.more-button-dropdown-wrap {
+    position: relative;
+
+    .more-button-button {
+        width: 34px;
+        height: 34px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: solid 1px #cccccc;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+}
+
+.more-button-dropdown {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    height: 0px;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all .3s ease-in-out;
+    overflow-Y: scroll;
+    font-family: Nunito Sans, sans-serif;
+
+    position: absolute;
+    z-index: 9999;
+
+    .more-button-content {
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .column-field {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            cursor: pointer;
+
+            .radio-button {
+                display: flex;
+            }
+
+            .column-label {
+                font-size: 14px;
+            }
+        }
+    }
+}

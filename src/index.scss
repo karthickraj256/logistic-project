@@ -5,10 +5,12 @@ body {
     margin: 0px;
 }
 @import './scss/App.scss';
+@import './scss/more-options.scss';
 
 // admin pages
 @import './admin/pages/layout/style.scss';
 @import './admin/pages/dashboard/style.scss';
+@import './admin/pages/consumer/style.scss';
 
 // admin components
 @import './admin/components/header/style.scss';
@@ -22,4 +24,9 @@ body {
 @import './admin/components/date-input-box/style.scss';
 @import './admin/components/data-table/style.scss';
 @import './admin/components/botton/style.scss';
-@import './admin//components/filter-dropdown/style.scss';
+@import './admin/components/filter-dropdown/style.scss';
+@import './admin/components/table-column-dropdown/style.scss';
+@import './admin/components/more-button-dropdown/style.scss';
+@import './admin/components/date-range-input-box/style.scss';
+@import './admin/components/modal-box/style.scss';
+@import './admin/components/tab-menus/style.scss';

@@ -1,0 +1,176 @@
+.date-range-input-box-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+
+    .input-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #ADADAD;
+
+        display: flex;
+        gap: 3px;
+
+        span {
+            color: #FF4D4F;
+        }
+    }
+
+    .input-box {
+        border: 1px solid #D5D5D5;
+        border-radius: 4px;
+        max-width: 360px;
+        min-width: 215px;
+        height: 36px;
+        background-color: #F5F6FA;
+        padding: 0px 12px;
+
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        &.textarea {
+            height: auto;
+            padding: 12px;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            height: 100%;
+            flex: 1;
+            background-color: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .6px;
+            color: #202224;
+
+            &::placeholder {
+                color: #A6A6A6;
+                font-weight: 400;
+            }
+        }
+
+        textarea {
+            border: none;
+            outline: none;
+            height: 187px;
+            flex: 1;
+            background-color: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: .6px;
+            color: #202224;
+
+            &::placeholder {
+                color: #A6A6A6;
+                font-weight: 400;
+            }
+        }
+
+        .input-icon {
+            display: flex;
+        }
+
+        .number-input-arrows {
+            display: flex;
+            align-items: center;
+
+            .input-icon {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .calender-container {
+        position: absolute;
+        z-index: 9;
+        width: auto;
+        height: 0px;
+        opacity: 0;
+        background-color: #FFFFFF;
+        border: solid 0.3px #B9B9B9;
+        border-radius: 26px;
+        overflow: hidden;
+        transition: all .3s ease-in-out;
+
+        .calender-header {
+            padding: 12px;
+            display: flex;
+
+            .calender-title {
+                font-size: 15px;
+                font-weight: 600;
+                color: #202224;
+                flex: 1;
+            }
+
+            .change-buttons {
+                display: flex;
+                gap: 10px;
+
+                .button-item {
+                    cursor: pointer;
+                    width: 22px;
+                    height: 22px;
+                    background-color: #E7E9EE;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 4px;
+                }
+            }
+        }
+
+        .calender-body {
+            display: flex;
+            gap: 20px;
+            border-top: 0.4px solid #979797;
+
+            .calender-body-dates {
+                display: flex;
+                gap: 10px;
+                padding: 12px;
+                flex-direction: column;
+
+                .calender-week-dates {
+                    display: grid;
+                    grid-template-columns: repeat(7, 1fr);
+
+                    .item {
+                        width: 40px;
+                        height: 40px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+
+                .calender-month-dates {
+                    display: grid;
+                    grid-template-columns: repeat(7, 1fr);
+
+                    .item {
+                        width: 40px;
+                        height: 40px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 12px;
+                        cursor: pointer;
+
+                        &.active {
+                            background-color: #6085FF;
+                            color: #FFFFFF;
+                        }
+
+                        &:hover {
+                            background-color: #cccaca;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
