@@ -31,28 +31,25 @@ function MoreButtonDropDown(props: MoreButtonDropDownInterface) {
         left: rect.left,
         top: rect.top + rect.height,
       };
-      console.log(rect);
 
-      if (
-        rect.left + rect.width + 200 >
-          document.body.clientWidth
-      ) {
-        newStyle.left = (rect.left + rect.width) - 200;
+      if (rect.left + rect.width + 200 > document.body.clientWidth) {
+        newStyle.left = rect.left + rect.width - 200;
       }
-      if (
-        rect.top + rect.height + 100 >
-          document.body.clientHeight
-      ) {
-        newStyle.top = (rect.top + rect.width) - 100;
+      if (rect.top + rect.height + 100 > document.body.clientHeight) {
+        newStyle.top = rect.top + rect.width - 100;
       }
       setStyle(newStyle);
     }
   };
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
+      const closestInputBox = (event.target as HTMLElement).closest(
+        ".more-button-dropdown"
+      );
       if (
         inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
+        !inputRef.current.contains(event.target as Node) &&
+        !closestInputBox
       ) {
         setStyle({});
       }
@@ -70,17 +67,17 @@ function MoreButtonDropDown(props: MoreButtonDropDownInterface) {
         <MoreButtonIcon />
       </div>
       {ReactDOM.createPortal(
-        <div
-          className="more-button-dropdown"
-          style={style}
-        >
+        <div className="more-button-dropdown" style={style}>
           <div className="more-button-content">
             {buttonList.map(
               (item) =>
                 item.component || (
                   <div
                     className="column-field"
-                    onClick={() => item.function(value || "")}
+                    onClick={() => {
+                      item.function(value || "");
+                      setStyle({});
+                    }}
                   >
                     <div className="radio-button">{item.icon}</div>
                     <div className="column-label">{item.label}</div>

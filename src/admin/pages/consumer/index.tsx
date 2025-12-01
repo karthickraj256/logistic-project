@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { saveAs } from 'file-saver';
+import React, { useEffect, useState } from "react";
+import { saveAs } from "file-saver";
 import HeaderTitle from "../../components/header-title";
 import DataTable from "../../components/data-table";
 
@@ -10,42 +10,83 @@ import Button from "../../components/botton";
 import { DashboardIcon, UserAdd } from "../../../assets/icons/normal-svg";
 import MoreButtonDropDown from "../../components/more-button-dropdown";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import {
+  FilterDataInterface,
+  ModalContentInterface,
+} from "../../interface/common";
+import { deleteConsumer, setFilterData } from "../../../redux/slice/consumerSlice";
+import ModalBox from "../../components/modal-box";
+import AddConsumerModal from "./add-consumer/add-consumer";
+import EditConsumerModal from "./add-consumer/edit-consumer";
+import ViewConsumer from "./view-consumer/view-consumer";
+import { setNotification } from "../../../redux/slice/notificationSlice";
 
 function Consumer() {
   const dispatch = useAppDispatch();
-  const { totalCount, consumers } = useAppSelector((state) => state.consumer);
+  const { totalCount, consumers, filterData } = useAppSelector(
+    (state) => state.consumer
+  );
+  const [modalContent, setModalContent] = useState<ModalContentInterface>({
+    status: false,
+    content: <div></div>,
+    header: true,
+    title: "",
+  });
+  const [sidePanelContent, setSidePanelContent] = useState<React.ReactNode>(null);
+
+  const closeModal = () => {
+    setModalContent({ ...modalContent, status: false });
+  };
+
+  const consumerAdd = () => {
+    setModalContent({
+      status: true,
+      content: <AddConsumerModal closeModal={closeModal} />,
+      title: "Add Consumer",
+      header: true,
+    });
+  };
+
+  const consumerEdit = (id: string) => {
+    const oldData = consumers.find(item => item.id === id);
+    if (!oldData) return;
+    setModalContent({
+      status: true,
+      content: <EditConsumerModal closeModal={closeModal} oldData={oldData} />,
+      title: "Add Consumer",
+      header: true,
+    });
+  };
+
+  const consumerView = (id: string) => {
+    const oldData = consumers.find(item => item.id === id);
+    if (!oldData) return;
+    setSidePanelContent(<ViewConsumer closeSidebar={() => setSidePanelContent(null)} currentConsumer={oldData} />);
+  };
+
+  const consumerDelete = (id: string) => {
+    dispatch(deleteConsumer(id));
+    dispatch(setNotification({ notificationStatus: true, message: 'Consumer deleted', type: 'error' }));
+  };
+
   const moreButton = [
     {
       label: "Edit",
       icon: <DashboardIcon />,
-      function: () => {},
+      function: consumerEdit,
     },
     {
       label: "View",
       icon: <DashboardIcon />,
-      function: () => {},
+      function: consumerView,
     },
     {
       label: "Delete",
       icon: <DashboardIcon />,
-      function: () => {},
+      function: consumerDelete,
     },
   ];
 
-  const filterData = [
-    {
-      label: "Start Date",
-      name: "startDate",
-      value: "",
-      type: "date" as "date",
-    },
-    {
-      label: "End Date",
-      name: "endDate",
-      value: "",
-      type: "date" as "date",
-    },
-  ];
   const header = [
     {
       name: "Full Name",
@@ -54,7 +95,7 @@ function Consumer() {
       sortable: true,
       Call: (value: any) => (
         <div>
-          <div>{value.fullName}</div>
+          <div className="link-button" onClick={() => consumerView(value.id)}>{value.fullName}</div>
         </div>
       ),
     },
@@ -93,10 +134,14 @@ function Consumer() {
       key: "action",
       width: "100px",
       Call: (value: any) => (
-        <MoreButtonDropDown buttonList={moreButton} value={String(value)} />
+        <MoreButtonDropDown buttonList={moreButton} value={value.id} />
       ),
     },
   ];
+
+  const handleFilterData = (filters: FilterDataInterface[]) => {
+    dispatch(setFilterData(filters));
+  };
 
   // const saveJsonFile = () => {
   //   const arrayData = [
@@ -117,6 +162,13 @@ function Consumer() {
 
   return (
     <div className="consumer-wrap">
+      <ModalBox
+        openStatus={modalContent.status}
+        content={modalContent.content}
+        title={modalContent.title}
+        header={modalContent.header}
+        closeFunction={closeModal}
+      />
       <div className="consumer-header">
         <div className="header-left">
           <HeaderTitle title="Consumer" />
@@ -128,7 +180,10 @@ function Consumer() {
       <div className="consumer-body white-box">
         <div className="more-options">
           <div className="left-options flax-wrap">
-            <FilterDropDown filterData={filterData} onChange={() => {}} />
+            <FilterDropDown
+              filterData={filterData}
+              onChange={handleFilterData}
+            />
             <ExportButtonDropDown onClick={() => {}} />
           </div>
           <div className="right-options flax-wrap">
@@ -144,14 +199,18 @@ function Consumer() {
               label="Add"
               icon={<UserAdd color="#ffffff" />}
               type="primary"
-              onClick={() => {}}
+              onClick={consumerAdd}
             />
           </div>
         </div>
         <div className="full-table">
-          <div className="filter-options"></div>
-          <DataTable header={header} values={consumers} />
-          <div className="view-tab"></div>
+          <DataTable
+            header={header}
+            values={consumers}
+            filterOptions={filterData}
+            setFilterData={handleFilterData}
+            sidePanel={sidePanelContent}
+          />
         </div>
       </div>
     </div>

@@ -59,5 +59,16 @@
                 background: #c06016;
             }
         }
+
+        &.disabled {
+            background: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+
+            &:hover {
+                background: #cccccc;
+                cursor: not-allowed;
+            }
+        }
     }
 }

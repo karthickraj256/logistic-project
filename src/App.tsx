@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // admin pages
 import Layout from "./admin/pages/layout";
+import NotificationComponent from "./admin/components/notification";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/admin/*" element={<Layout />} />
         </Routes>
       </Router>
+      <NotificationComponent />
     </div>
   );
 }

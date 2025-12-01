@@ -18,8 +18,10 @@
 
 /* Firefox */
 * {
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scrollbar-color: #888 transparent;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .App {
@@ -44,4 +46,10 @@ img {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
+}
+
+.link-button {
+    color: #1A73E8;
+    cursor: pointer;
+    text-decoration: underline;
 }

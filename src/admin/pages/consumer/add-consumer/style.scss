@@ -1,0 +1,28 @@
+.add-consumer-wrap {
+    width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .add-consumer-form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        .form-field {
+
+        }
+        .address-field {
+            grid-column: span 2;
+        }
+    }
+    .add-consumer-footer {
+        display: flex;
+        justify-content: flex-end;
+
+        .footer-buttons {
+            display: flex;
+            gap: 10px;
+        }
+    }
+}

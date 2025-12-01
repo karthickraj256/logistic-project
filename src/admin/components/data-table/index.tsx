@@ -1,5 +1,11 @@
 import React from "react";
-import { UpDownArrowIcon } from "../../../assets/icons/normal-svg";
+import {
+  CloseIcon,
+  UpDownArrowIcon,
+  CircleCloseIcon,
+  ClearFilterIcon,
+} from "../../../assets/icons/normal-svg";
+import { FilterDataInterface } from "../../interface/common";
 
 interface DataTableColumnInterface {
   name: string;
@@ -13,12 +19,55 @@ interface DataTableColumnInterface {
 interface DataTableInterface {
   header: DataTableColumnInterface[];
   values: any[];
+  sidePanel?: React.ReactNode;
+  filterOptions: FilterDataInterface[];
+  setFilterData: (filters: FilterDataInterface[]) => void;
 }
 
 function DataTable(props: DataTableInterface) {
-  const { header, values } = props;
+  const { header, values, sidePanel, filterOptions, setFilterData } = props;
+  const filterOptionClose = (name: string) => {
+    const balancedFilters = filterOptions.map((filter) => {
+      if (filter.name === name) {
+        return { ...filter, value: "" };
+      }
+      return filter;
+    });
+    setFilterData(balancedFilters);
+  };
+
+  const filterOptionsClear = () => {
+    console.log("Cleared All Filter Options");
+    setFilterData(filterOptions.map(item => ({ ...item, value: "" })));
+  };  
   return (
     <div className="table-card">
+      {filterOptions?.filter((option) => option.value != '').length > 0 && (
+        <div className="filter-options">
+          {/* Filter options can be added here in the future */}
+          <div className="filter-options-header">
+            <div className="title">Filters</div>
+            <div className="close-icon" onClick={filterOptionsClear} role="button">
+              <ClearFilterIcon />
+            </div>
+          </div>
+          <div className="filter-options-content">
+            {filterOptions?.map((filter, index) => filter.value && (
+              <div className="option-content" key={index}>
+                <div className="label">
+                  {filter.label} : {filter.value}
+                </div>
+                <div
+                  className="close-icon"
+                  onClick={() => filterOptionClose(filter.name)}
+                >
+                  <CircleCloseIcon />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="table-wrap">
         <table aria-label="Sample sticky table">
           <thead>
@@ -53,6 +102,7 @@ function DataTable(props: DataTableInterface) {
           </tbody>
         </table>
       </div>
+      {sidePanel && <div className="view-tab">{sidePanel}</div>}
     </div>
   );
 }

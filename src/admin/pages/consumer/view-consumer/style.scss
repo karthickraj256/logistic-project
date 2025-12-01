@@ -1,0 +1,36 @@
+.view-consumer-wrap {
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .view-consumer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .close-icon {
+            cursor: pointer;
+        }
+    }
+    .view-consumer-content {
+        .field {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            .label {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 4px;
+            }
+            .value {
+                font-size: 14px;
+                color: #555555;
+            }
+        }
+    }
+}

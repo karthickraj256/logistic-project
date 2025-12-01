@@ -3,25 +3,18 @@ import { CloseIcon, FilterIcon } from "../../../assets/icons/normal-svg";
 import InputBox from "../input-box";
 import Button from "../botton";
 import DateInputBox from "../date-input-box";
-
-interface FilterDataInterface {
-  label: string;
-  name: string;
-  value: string | number;
-  type: "text" | "select" | "date";
-  dataList?: any[];
-  placeholder?: string;
-}
+import { FilterDataInterface } from "../../interface/common";
 
 interface FilterDropDownInterface {
   filterData: FilterDataInterface[];
-  onChange: (name: string, value: string | number) => void;
+  onChange: (value: FilterDataInterface[]) => void;
 }
 
 function FilterDropDown(props: FilterDropDownInterface) {
   const { filterData, onChange } = props;
   const inputRef = useRef<HTMLInputElement>(null);
-  const [style, setStyle] = useState<any>({});
+  const [style, setStyle] = useState<any>({ display: "none" });
+  const [currentValue, setCurrentValue] = useState<FilterDataInterface[]>(filterData);
 
   const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
     const closestInputBox = (e.target as HTMLElement).closest(
@@ -36,6 +29,7 @@ function FilterDropDown(props: FilterDropDownInterface) {
         height: 'auto',
         width: totalCalender?.width || 250,
         opacity: 1,
+        display: "flex",
       };
       if (
         totalCalender &&
@@ -49,13 +43,35 @@ function FilterDropDown(props: FilterDropDownInterface) {
       setStyle(newStyle);
     }
   };
+
+  const onChangeLocal = (name: string, value: string | number) => {
+    const updatedValues = currentValue.map((item) => {
+      if (item.name === name) {
+        return { ...item, value: value };
+      }
+      return item;
+    });
+    setCurrentValue(updatedValues);
+  };
+
+  const submit = () => {
+    onChange(currentValue);
+    setStyle({ display: "none" });
+  }
+
+  const reset = () => {
+    onChange(currentValue.map(item => ({ ...item, value: "" })));
+    setCurrentValue(currentValue.map(item => ({ ...item, value: "" })));
+    setStyle({ display: "none" });
+  }
+
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
       if (
         inputRef.current &&
         !inputRef.current.contains(event.target as Node)
       ) {
-        setStyle({});
+        setStyle({ display: "none" });
       }
     };
 
@@ -64,6 +80,10 @@ function FilterDropDown(props: FilterDropDownInterface) {
       document.removeEventListener("mousedown", handleClick);
     };
   }, []);
+
+  useEffect(() => {
+    setCurrentValue(filterData);
+  }, [filterData]);
 
   return (
     <div className="filter-dropdown-wrap" ref={inputRef}>
@@ -78,13 +98,13 @@ function FilterDropDown(props: FilterDropDownInterface) {
           </div>
         </div>
         <div className="filter-form-content">
-          {filterData.map((item: FilterDataInterface) =>
+          {currentValue.map((item: FilterDataInterface) =>
             item.type === "date" ? (
               <div className="filter-form-input">
                 <DateInputBox
                   label={item.label}
                   name={item.name}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   value={item.value}
                 />
               </div>
@@ -94,7 +114,7 @@ function FilterDropDown(props: FilterDropDownInterface) {
                   label={item.label}
                   name={item.name}
                   placeholder={item.placeholder}
-                  onChange={onChange}
+                  onChange={onChangeLocal}
                   type={item.type}
                   dataList={item.dataList || []}
                   value={item.value}
@@ -104,8 +124,8 @@ function FilterDropDown(props: FilterDropDownInterface) {
           )}
         </div>
         <div className="filter-form-buttons">
-          <Button label="Reset" type="default" onClick={() => {}} />
-          <Button label="Apply" type="primary" onClick={() => {}} />
+          <Button label="Reset" type="default" onClick={reset} />
+          <Button label="Apply" type="primary" onClick={submit} />
         </div>
       </div>
     </div>

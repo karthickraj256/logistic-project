@@ -9,8 +9,14 @@ body {
 
 // admin pages
 @import './admin/pages/layout/style.scss';
+
+// dashboard page
 @import './admin/pages/dashboard/style.scss';
+
+// consumer page
 @import './admin/pages/consumer/style.scss';
+@import './admin/pages/consumer/add-consumer/style.scss';
+@import './admin/pages/consumer/view-consumer/style.scss';
 
 // admin components
 @import './admin/components/header/style.scss';
@@ -30,3 +36,4 @@ body {
 @import './admin/components/date-range-input-box/style.scss';
 @import './admin/components/modal-box/style.scss';
 @import './admin/components/tab-menus/style.scss';
+@import './admin/components/notification/style.scss';

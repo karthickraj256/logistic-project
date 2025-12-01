@@ -1,12 +1,23 @@
 import React from "react";
 
-function TabMenus() {
+interface TabMenusProps {
+  tabs: { label: string; key: string }[];
+  onTabClick: (key: string) => void;
+  activeTabKey: string;
+}
+function TabMenus(props: TabMenusProps) {
+  const { tabs, onTabClick, activeTabKey } = props;
   return (
     <div className="tab-menus-wrap">
-      <div className="tab-menu" onClick={() => {}}>Tab One</div>
-      <div className="tab-menu" onClick={() => {}}>Tab Two</div>
-      <div className="tab-menu" onClick={() => {}}>Tab Three</div>
-      <div className="indicator"></div>
+      {tabs.map((tab) => (
+        <div
+          key={tab.key}
+          className={`tab-menu ${activeTabKey === tab.key ? "active" : ""}`}
+          onClick={() => onTabClick(tab.key)}
+        >
+          {tab.label}
+        </div>
+      ))}
     </div>
   );
 }

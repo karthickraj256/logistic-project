@@ -16,6 +16,7 @@ interface InputBoxPropsInterface {
   label?: string;
   name: string;
   placeholder?: string;
+  id?: string;
   frontIcon?: React.ReactNode;
   backIcon?: React.ReactNode;
   type: "text" | "password" | "number" | "autocomplete" | "select" | "textarea";
@@ -36,6 +37,7 @@ function InputBox(props: InputBoxPropsInterface) {
     frontIcon,
     backIcon,
     value,
+    id,
     type,
     required,
     readOnly,
@@ -166,7 +168,7 @@ function InputBox(props: InputBoxPropsInterface) {
   return (
     <div className="input-box-wrap">
       {label && (
-        <label className="input-label" htmlFor="input-box">
+        <label className="input-label" htmlFor={id}>
           {label}
           {required && <span className="required">*</span>}
         </label>
@@ -178,7 +180,7 @@ function InputBox(props: InputBoxPropsInterface) {
         {frontIcon && <span className="input-icon">{frontIcon}</span>}
         {type === "textarea" ? (
           <textarea
-            id="input-box"
+            id={id}
             placeholder={placeholder}
             autoComplete="off"
             required={required}
@@ -190,7 +192,7 @@ function InputBox(props: InputBoxPropsInterface) {
         ) : (
           <input
             type={inputType}
-            id="input-box"
+            id={id}
             ref={inputRef}
             placeholder={placeholder}
             value={value}

@@ -34,9 +34,15 @@ import ModalBox from "../../components/modal-box";
 import TabMenus from "../../components/tab-menus";
 
 function Dashboard() {
+  const tabs = [
+    { label: "Tab One", key: "tab1" },
+    { label: "Tab Two", key: "tab2" },
+    { label: "Tab Three", key: "tab3" },
+  ]
   const [values, setValues] = useState<any>({
     firstName: "",
   });
+  const [activeTabKey, setActiveTabKey] = useState<string>("tab1");
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const handleChange = (name: string, value: string | number) => {
@@ -455,7 +461,7 @@ function Dashboard() {
               <div>
                 <FilterDropDown
                   filterData={filterData}
-                  onChange={handleChange}
+                  onChange={() => {}}
                 />
               </div>
               <div>
@@ -474,11 +480,11 @@ function Dashboard() {
               <div>
                 <MoreButtonDropDown buttonList={moreButton} />
               </div>
-              <div><TabMenus /></div>
+              <div><TabMenus tabs={tabs} onTabClick={setActiveTabKey} activeTabKey={activeTabKey} /></div>
             </div>
           </div>
           <div className="white-box">
-            <DataTable header={header} values={usersLists} />
+            {/* <DataTable header={header} values={usersLists} filterOptions={filterData} setFilterData={() => {}} /> */}
           </div>
         </div>
       </div>

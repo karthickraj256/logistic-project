@@ -1,5 +1,5 @@
 import React from "react";
-import { CloseIcon } from "../../../assets/icons/normal-svg";
+import { CircleCloseIcon } from "../../../assets/icons/normal-svg";
 
 interface ModalBoxInterface {
   openStatus: boolean;
@@ -18,7 +18,7 @@ function ModalBox(props: ModalBoxInterface) {
           <div className="modal-box-header">
             <div className="title">{title}</div>
             <div className="close" onClick={closeFunction}>
-              <CloseIcon />
+              <CircleCloseIcon width="22" height="22" color="#000" />
             </div>
           </div>
         )}

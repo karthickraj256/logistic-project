@@ -13,8 +13,11 @@
 
         .content-body {
             padding: 16px 20px;
+            box-sizing: border-box;
 
-            height: calc(100vh - 105px);
+            height: calc(100vh - 70px);
+            overflow-y: scroll;
+            overflow-x: hidden;
         }
     }
 }
