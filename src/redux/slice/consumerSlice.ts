@@ -8,12 +8,21 @@ export interface ConsumerState {
   totalCount: number;
   consumers: ConsumerListInterface;
   filterData: FilterDataInterface[];
+  viewColumns: string[];
 }
 
 // Define the initial state using that type
 const initialState: ConsumerState = {
   totalCount: consumerLists.length || 0,
   consumers: consumerLists || [],
+  viewColumns: [
+    'fullName',
+    'phoneNumber',
+    'address',
+    'gstNumber',
+    'panNumber',
+    'totalOrder',
+  ],
   filterData: [
     {
       label: "Search",
@@ -22,17 +31,19 @@ const initialState: ConsumerState = {
       type: "text" as "text",
     },
     {
-      label: "Start Date",
+      label: "Date Range",
       name: "startDate",
+      name1: "endDate",
       value: "",
-      type: "date" as "date",
+      value1: "",
+      type: "dateRange" as "dateRange",
     },
-    {
-      label: "End Date",
-      name: "endDate",
-      value: "",
-      type: "date" as "date",
-    },
+    // {
+    //   label: "End Date",
+    //   name: "endDate",
+    //   value: "",
+    //   type: "date" as "date",
+    // },
   ],
 }
 
@@ -56,9 +67,12 @@ export const consumerSlice = createSlice({
     setFilterData: (state, action: PayloadAction<FilterDataInterface[]>) => {
       state.filterData = action.payload;
     },
+    setViewColumns: (state, action: PayloadAction<string[]>) => {
+      state.viewColumns = action.payload;
+    },
   }
 })
 
-export const { createConsumer, setFilterData, updateConsumer, deleteConsumer } = consumerSlice.actions
+export const { createConsumer, setFilterData, updateConsumer, deleteConsumer, setViewColumns } = consumerSlice.actions
 
 export default consumerSlice.reducer

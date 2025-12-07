@@ -1,0 +1,48 @@
+.add-role-wrap {
+    width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .add-role-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .form-field {
+
+        }
+
+        .permissions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 400px;
+            overflow-y: scroll;
+            .permission-session {
+                display: flex;
+                gap: 10px;
+                flex-direction: column;
+                border-bottom: solid .5px #ccc;
+                .permission-header {
+                    font-size: 15px;
+                    color: #000;
+                    font-weight: 700;
+                }
+                .permission-content {
+                    padding-bottom: 6px;
+                }
+            }
+        }
+    }
+    .add-role-footer {
+        display: flex;
+        justify-content: flex-end;
+
+        .footer-buttons {
+            display: flex;
+            gap: 10px;
+        }
+    }
+}

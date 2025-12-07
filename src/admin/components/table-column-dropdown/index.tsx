@@ -10,7 +10,7 @@ interface TableColumn {
 interface TableColumnDropDownInterface {
   columnList: TableColumn[];
   selectedKeys: string[];
-  onChange: (name: string) => void;
+  onChange: (name: string[]) => void;
 }
 
 function TableColumnDropDown(props: TableColumnDropDownInterface) {
@@ -28,7 +28,7 @@ function TableColumnDropDown(props: TableColumnDropDownInterface) {
     if (closestInputBox) {
       const rect = closestInputBox.getBoundingClientRect();
       const newStyle: any = {
-        height: totalCalender?.height || 250,
+        height: `${columnList.length * 24 + 40}px`,
         width: 200,
         opacity: 1,
       };
@@ -52,6 +52,14 @@ function TableColumnDropDown(props: TableColumnDropDownInterface) {
       setStyle(newStyle);
     }
   };
+
+  const handleClick = (name: string) => {
+    if (selectedKeys.includes(name)) {
+      onChange(selectedKeys.filter((item) => item !== name));
+    } else {
+      onChange([...selectedKeys, name]);
+    }
+  }
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
       if (
@@ -76,11 +84,11 @@ function TableColumnDropDown(props: TableColumnDropDownInterface) {
       <div className="table-column-dropdown" style={style} id="table_column_height">
         <div className="table-column-content">
           {columnList.map((item: TableColumn) => (
-            <div className="column-field">
+            <div className="column-field" onClick={() => handleClick(item.name)}>
               <div className="radio-button">
                 {selectedKeys.includes(item.name) ? <CheckBoxIcon /> : <UncheckBoxIcon />}
               </div>
-              <div className="column-label" onClick={() => onChange(item.name)}>{item.label}</div>
+              <div className="column-label">{item.label}</div>
             </div>
           ))}
         </div>

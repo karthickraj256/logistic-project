@@ -1,0 +1,8 @@
+[
+    {
+        "id": "1",
+        "roleName": "Super Admin",
+        "permissions": ["dashboard", "dashboardBranch", "customerList", "customerAdd", "customerUpdate", "customerDelete"],
+        "totalUsers": 0
+    }
+]

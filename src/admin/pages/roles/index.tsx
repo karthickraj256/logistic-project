@@ -14,21 +14,21 @@ import {
   ModalContentInterface,
 } from "../../interface/common";
 import {
-  deleteConsumer,
+  deleteRole,
   setFilterData,
   setViewColumns,
-} from "../../../redux/slice/consumerSlice";
+} from "../../../redux/slice/rolesSlice";
 import ModalBox from "../../components/modal-box";
-import AddConsumerModal from "./add-consumer/add-consumer";
-import EditConsumerModal from "./add-consumer/edit-consumer";
-import ViewConsumer from "./view-consumer/view-consumer";
+import AddRoleModal from "./add-role/add-role";
+import EditRoleModal from "./add-role/edit-role";
+import ViewRole from "./view-role/view-role";
 import { setNotification } from "../../../redux/slice/notificationSlice";
 import { exportFile } from "../../../utility/export";
 
-function Consumer() {
+function Roles() {
   const dispatch = useAppDispatch();
-  const { totalCount, consumers, filterData, viewColumns } = useAppSelector(
-    (state) => state.consumer
+  const { totalCount, roles, filterData, viewColumns } = useAppSelector(
+    (state) => state.roles
   );
   const [modalContent, setModalContent] = useState<ModalContentInterface>({
     status: false,
@@ -46,28 +46,28 @@ function Consumer() {
   const consumerAdd = () => {
     setModalContent({
       status: true,
-      content: <AddConsumerModal closeModal={closeModal} />,
-      title: "Add Consumer",
+      content: <AddRoleModal closeModal={closeModal} />,
+      title: "Add Role",
       header: true,
     });
   };
 
   const consumerEdit = (id: string) => {
-    const oldData = consumers.find((item) => item.id === id);
+    const oldData = roles.find((item) => item.id === id);
     if (!oldData) return;
     setModalContent({
       status: true,
-      content: <EditConsumerModal closeModal={closeModal} oldData={oldData} />,
-      title: "Edit Consumer",
+      content: <EditRoleModal closeModal={closeModal} oldData={oldData} />,
+      title: "Edit Role",
       header: true,
     });
   };
 
   const consumerView = (id: string) => {
-    const oldData = consumers.find((item) => item.id === id);
+    const oldData = roles.find((item) => item.id === id);
     if (!oldData) return;
     setSidePanelContent(
-      <ViewConsumer
+      <ViewRole
         closeSidebar={() => setSidePanelContent(null)}
         currentConsumer={oldData}
       />
@@ -75,11 +75,11 @@ function Consumer() {
   };
 
   const consumerDelete = (id: string) => {
-    dispatch(deleteConsumer(id));
+    dispatch(deleteRole(id));
     dispatch(
       setNotification({
         notificationStatus: true,
-        message: "Consumer deleted",
+        message: "Role deleted",
         type: "error",
       })
     );
@@ -100,46 +100,26 @@ function Consumer() {
 
   const header = [
     {
-      name: "Full Name",
-      key: "fullName",
-      width: "100px",
+      name: "Role Name",
+      key: "roleName",
       sortable: true,
       Call: (value: any) => (
         <div>
           <div className="link-button" onClick={() => consumerView(value.id)}>
-            {value.fullName}
+            {value.roleName}
           </div>
         </div>
       ),
     },
     {
-      name: "Phone Number",
-      key: "phoneNumber",
-      width: "100px",
+      name: "Permissions",
+      key: "permissions",
       sortable: true,
+      Call: (value: any) => <div>{value.permissions.length} Permissions</div>,
     },
     {
-      name: "Address",
-      key: "address",
-      width: "100px",
-      sortable: true,
-    },
-    {
-      name: "GST Number",
-      key: "gstNumber",
-      width: "100px",
-      sortable: true,
-    },
-    {
-      name: "Pan Number",
-      key: "panNumber",
-      width: "100px",
-      sortable: true,
-    },
-    {
-      name: "Total Order",
-      key: "totalOrder",
-      width: "100px",
+      name: "Total Users",
+      key: "totalUsers",
       sortable: true,
     },
     {
@@ -158,18 +138,15 @@ function Consumer() {
 
   const handleViewColumns = (list: string[]) => {
     dispatch(setViewColumns(list));
-  }
+  };
 
   const toExportFile = (key: string) => {
-    const exportData = consumers.map((data) => ({
-      "Full Name": data.fullName,
-      "Phone Number": data.phoneNumber,
-      "Address": data.address,
-      "GST Number": data.gstNumber,
-      "Pan Number": data.panNumber,
-      "Total Order": data.totalOrder,
+    const exportData = roles.map((data) => ({
+      "Role Name": data.roleName,
+      Permissions: data.permissions.join(", "),
+      "Total Users": data.totalUsers,
     }));
-    exportFile(exportData, key, 'consumer');
+    exportFile(exportData, key, "role");
   };
 
   useEffect(() => {
@@ -177,7 +154,7 @@ function Consumer() {
   }, []);
 
   return (
-    <div className="consumer-wrap">
+    <div className="roles-wrap">
       <ModalBox
         openStatus={modalContent.status}
         content={modalContent.content}
@@ -185,15 +162,15 @@ function Consumer() {
         header={modalContent.header}
         closeFunction={closeModal}
       />
-      <div className="consumer-header">
+      <div className="roles-header">
         <div className="header-left">
-          <HeaderTitle title="Consumer" />
+          <HeaderTitle title="Roles" />
         </div>
         <div className="header-right">
-          Total Consumer: <b>{totalCount}</b>
+          Total Roles: <b>{totalCount}</b>
         </div>
       </div>
-      <div className="consumer-body white-box">
+      <div className="roles-body white-box">
         <div className="more-options">
           <div className="left-options flax-wrap">
             <FilterDropDown
@@ -204,10 +181,12 @@ function Consumer() {
           </div>
           <div className="right-options flax-wrap">
             <TableColumnDropDown
-              columnList={header.map((item) => ({
-                name: item.key,
-                label: item.name,
-              })).filter((item) => item.name !== 'action')}
+              columnList={header
+                .map((item) => ({
+                  name: item.key,
+                  label: item.name,
+                }))
+                .filter((item) => item.name !== "action")}
               selectedKeys={viewColumns}
               onChange={handleViewColumns}
             />
@@ -222,7 +201,7 @@ function Consumer() {
         <div className="full-table">
           <DataTable
             header={header}
-            values={consumers}
+            values={roles}
             filterOptions={filterData}
             setFilterData={handleFilterData}
             sidePanel={sidePanelContent}
@@ -234,4 +213,4 @@ function Consumer() {
   );
 }
 
-export default Consumer;
+export default Roles;

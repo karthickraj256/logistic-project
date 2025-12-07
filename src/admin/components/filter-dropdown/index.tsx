@@ -4,6 +4,7 @@ import InputBox from "../input-box";
 import Button from "../botton";
 import DateInputBox from "../date-input-box";
 import { FilterDataInterface } from "../../interface/common";
+import DateRangeInputBox from "../date-range-input-box";
 
 interface FilterDropDownInterface {
   filterData: FilterDataInterface[];
@@ -14,7 +15,8 @@ function FilterDropDown(props: FilterDropDownInterface) {
   const { filterData, onChange } = props;
   const inputRef = useRef<HTMLInputElement>(null);
   const [style, setStyle] = useState<any>({ display: "none" });
-  const [currentValue, setCurrentValue] = useState<FilterDataInterface[]>(filterData);
+  const [currentValue, setCurrentValue] =
+    useState<FilterDataInterface[]>(filterData);
 
   const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
     const closestInputBox = (e.target as HTMLElement).closest(
@@ -26,8 +28,8 @@ function FilterDropDown(props: FilterDropDownInterface) {
     if (closestInputBox) {
       const rect = closestInputBox.getBoundingClientRect();
       const newStyle: any = {
-        height: 'auto',
-        width: totalCalender?.width || 250,
+        height: "auto",
+        minWidth: totalCalender?.width || 250,
         opacity: 1,
         display: "flex",
       };
@@ -49,6 +51,9 @@ function FilterDropDown(props: FilterDropDownInterface) {
       if (item.name === name) {
         return { ...item, value: value };
       }
+      if (item.name1 === name) {
+        return { ...item, value1: value };
+      }
       return item;
     });
     setCurrentValue(updatedValues);
@@ -57,13 +62,13 @@ function FilterDropDown(props: FilterDropDownInterface) {
   const submit = () => {
     onChange(currentValue);
     setStyle({ display: "none" });
-  }
+  };
 
   const reset = () => {
-    onChange(currentValue.map(item => ({ ...item, value: "" })));
-    setCurrentValue(currentValue.map(item => ({ ...item, value: "" })));
+    onChange(currentValue.map((item) => ({ ...item, value: "", value1: "" })));
+    setCurrentValue(currentValue.map((item) => ({ ...item, value: "", value1: "" })));
     setStyle({ display: "none" });
-  }
+  };
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -106,6 +111,17 @@ function FilterDropDown(props: FilterDropDownInterface) {
                   name={item.name}
                   onChange={onChangeLocal}
                   value={item.value}
+                />
+              </div>
+            ) : item.type === "dateRange" ? (
+              <div className="filter-form-input">
+                <DateRangeInputBox
+                  label={item.label}
+                  name1={item.name}
+                  name2={item.name1 || ""}
+                  onChange={onChangeLocal}
+                  value1={item.value}
+                  value2={item.value1 || ""}
                 />
               </div>
             ) : (

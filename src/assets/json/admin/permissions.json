@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Dashboard",
+        "key": "dashboard",
+        "subPermissions": [
+            {
+                "name": "Dashboard",
+                "value": "dashboard"
+            },
+            {
+                "name": "Dashboard Branch",
+                "value": "dashboardBranch"
+            }
+        ]
+    },
+    {
+        "name": "Customer",
+        "key": "customer",
+        "subPermissions": [
+            {
+                "name": "Customer List",
+                "value": "customerList"
+            },
+            {
+                "name": "Customer Add",
+                "value": "customerAdd"
+            },
+            {
+                "name": "Customer Update",
+                "value": "customerUpdate"
+            },
+            {
+                "name": "Customer Delete",
+                "value": "customerDelete"
+            },
+            {
+                "name": "Customer Export",
+                "value": "customerExport"
+            }
+        ]
+    },
+    {
+        "name": "Branch",
+        "key": "branch",
+        "subPermissions": [
+            {
+                "name": "Branch List",
+                "value": "branchList"
+            },
+            {
+                "name": "Branch Add",
+                "value": "branchAdd"
+            },
+            {
+                "name": "Branch Update",
+                "value": "branchUpdate"
+            },
+            {
+                "name": "Branch Delete",
+                "value": "branchDelete"
+            },
+            {
+                "name": "Branch Export",
+                "value": "branchExport"
+            }
+        ]
+    },
+    {
+        "name": "Vehicle",
+        "key": "vehicle",
+        "subPermissions": [
+            {
+                "name": "Vehicle List",
+                "value": "vehicleList"
+            },
+            {
+                "name": "Vehicle Add",
+                "value": "vehicleAdd"
+            },
+            {
+                "name": "Vehicle Update",
+                "value": "vehicleUpdate"
+            },
+            {
+                "name": "Vehicle Delete",
+                "value": "vehicleDelete"
+            },
+            {
+                "name": "Vehicle Export",
+                "value": "vehicleExport"
+            }
+        ]
+    },
+    {
+        "name": "Orders",
+        "key": "orders",
+        "subPermissions": [
+            {
+                "name": "Orders List",
+                "value": "ordersList"
+            },
+            {
+                "name": "Orders Add",
+                "value": "ordersAdd"
+            },
+            {
+                "name": "Orders Update",
+                "value": "ordersUpdate"
+            },
+            {
+                "name": "Orders Delete",
+                "value": "ordersDelete"
+            },
+            {
+                "name": "Orders Export",
+                "value": "ordersExport"
+            }
+        ]
+    },
+    {
+        "name": "Transport",
+        "key": "transport",
+        "subPermissions": [
+            {
+                "name": "Transport List",
+                "value": "transportList"
+            },
+            {
+                "name": "Transport Add",
+                "value": "transportAdd"
+            },
+            {
+                "name": "Transport Update",
+                "value": "transportUpdate"
+            },
+            {
+                "name": "Transport Delete",
+                "value": "transportDelete"
+            },
+            {
+                "name": "Transport Export",
+                "value": "transportExport"
+            }
+        ]
+    }
+]

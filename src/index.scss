@@ -13,6 +13,11 @@ body {
 // dashboard page
 @import './admin/pages/dashboard/style.scss';
 
+// roles page
+@import './admin/pages/roles/style.scss';
+@import './admin/pages/roles/add-role/style.scss';
+@import './admin/pages/roles/view-role/style.scss';
+
 // consumer page
 @import './admin/pages/consumer/style.scss';
 @import './admin/pages/consumer/add-consumer/style.scss';
@@ -37,3 +42,4 @@ body {
 @import './admin/components/modal-box/style.scss';
 @import './admin/components/tab-menus/style.scss';
 @import './admin/components/notification/style.scss';
+@import './admin/components/radio-button/style.scss';

@@ -32,13 +32,20 @@ import MoreButtonDropDown from "../../components/more-button-dropdown";
 import DateRangeInputBox from "../../components/date-range-input-box";
 import ModalBox from "../../components/modal-box";
 import TabMenus from "../../components/tab-menus";
+import RadioButton from "../../components/radio-button";
 
 function Dashboard() {
   const tabs = [
     { label: "Tab One", key: "tab1" },
     { label: "Tab Two", key: "tab2" },
     { label: "Tab Three", key: "tab3" },
-  ]
+  ];
+
+  const radioButton = [
+    { name: "Tab One", value: "tab1" },
+    { name: "Tab Two", value: "tab2" },
+    { name: "Tab Three", value: "tab3" },
+  ];
   const [values, setValues] = useState<any>({
     firstName: "",
   });
@@ -481,6 +488,7 @@ function Dashboard() {
                 <MoreButtonDropDown buttonList={moreButton} />
               </div>
               <div><TabMenus tabs={tabs} onTabClick={setActiveTabKey} activeTabKey={activeTabKey} /></div>
+              <div><RadioButton activeValue={[]} buttonList={radioButton} onChange={(value: string) => console.log(value)} type="column" /></div>
             </div>
           </div>
           <div className="white-box">

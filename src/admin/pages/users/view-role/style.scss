@@ -1,0 +1,43 @@
+.view-role-wrap {
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .view-role-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .close-icon {
+            cursor: pointer;
+        }
+    }
+    .view-role-content {
+        .permissions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 66vh;
+            overflow-y: scroll;
+            .permission-session {
+                display: flex;
+                gap: 10px;
+                flex-direction: column;
+                border-bottom: solid .5px #ccc;
+                .permission-header {
+                    font-size: 15px;
+                    color: #000;
+                    font-weight: 700;
+                }
+                .permission-content {
+                    padding-bottom: 6px;
+                }
+            }
+        }
+    }
+}

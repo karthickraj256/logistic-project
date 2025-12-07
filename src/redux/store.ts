@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import consumerReducer from './slice/consumerSlice'
+import rolesReducer from './slice/rolesSlice'
 import notificationReducer from './slice/notificationSlice'
 
 export const store = configureStore({
   reducer: {
     consumer: consumerReducer,
+    roles: rolesReducer,
     notification: notificationReducer,
   }
 })

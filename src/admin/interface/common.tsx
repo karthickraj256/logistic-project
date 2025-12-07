@@ -16,7 +16,9 @@ export interface FilterDataInterface {
   label: string;
   name: string;
   value: string | number;
-  type: "text" | "select" | "date";
+  name1?: string;
+  value1?: string | number;
+  type: "text" | "select" | "date" | "dateRange";
   dataList?: any[];
   placeholder?: string;
 }

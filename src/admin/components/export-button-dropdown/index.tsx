@@ -18,6 +18,11 @@ function ExportButtonDropDown(props: ExportButtonDropDownInterface) {
       key: 'pdf',
       icon: <ExcelFileIcon />
     },
+    {
+      label: 'JSON File',
+      key: 'json',
+      icon: <ExcelFileIcon />
+    },
   ] 
   const { onClick } = props;
   const inputRef = useRef<HTMLInputElement>(null);

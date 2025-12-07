@@ -22,14 +22,15 @@ interface DataTableInterface {
   sidePanel?: React.ReactNode;
   filterOptions: FilterDataInterface[];
   setFilterData: (filters: FilterDataInterface[]) => void;
+  viewColumns?: string[];
 }
 
 function DataTable(props: DataTableInterface) {
-  const { header, values, sidePanel, filterOptions, setFilterData } = props;
+  const { header, values, sidePanel, filterOptions, setFilterData, viewColumns } = props;
   const filterOptionClose = (name: string) => {
     const balancedFilters = filterOptions.map((filter) => {
       if (filter.name === name) {
-        return { ...filter, value: "" };
+        return { ...filter, value: "", value1: "" };
       }
       return filter;
     });
@@ -37,8 +38,7 @@ function DataTable(props: DataTableInterface) {
   };
 
   const filterOptionsClear = () => {
-    console.log("Cleared All Filter Options");
-    setFilterData(filterOptions.map(item => ({ ...item, value: "" })));
+    setFilterData(filterOptions.map(item => ({ ...item, value: "", value1: "" })));
   };  
   return (
     <div className="table-card">
@@ -55,7 +55,7 @@ function DataTable(props: DataTableInterface) {
             {filterOptions?.map((filter, index) => filter.value && (
               <div className="option-content" key={index}>
                 <div className="label">
-                  {filter.label} : {filter.value}
+                  {filter.label} : {filter.value} {filter.value1 ? `to ${filter.value1}` : ""}
                 </div>
                 <div
                   className="close-icon"
@@ -72,7 +72,7 @@ function DataTable(props: DataTableInterface) {
         <table aria-label="Sample sticky table">
           <thead>
             <tr>
-              {header.map((item: DataTableColumnInterface) => (
+              {header.map((item: DataTableColumnInterface) => viewColumns?.includes(item.key) || item.key === 'action' ? (
                 <th key={item.key} style={{ width: item.width || "auto" }}>
                   <div className="header-content">
                     {item.headerCall ? item.headerCall() : item.name}
@@ -84,19 +84,19 @@ function DataTable(props: DataTableInterface) {
                     )}
                   </div>
                 </th>
-              ))}
+              ) : null)}
             </tr>
           </thead>
           <tbody>
             {values.map((value: any) => (
               <tr>
-                {header.map((item: DataTableColumnInterface) => (
+                {header.map((item: DataTableColumnInterface) => viewColumns?.includes(item.key) || item.key === 'action' ? (
                   <td>
                     <div className="col">
                       {item.Call ? item.Call(value) : value[item.key]}
                     </div>
                   </td>
-                ))}
+                ) : null)}
               </tr>
             ))}
           </tbody>
