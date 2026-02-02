@@ -23,7 +23,6 @@ import {
   SearchIconInput,
 } from "../../../assets/icons/normal-svg";
 import usersList from "../../../assets/json/admin/users.json";
-import usersLists from "../../../assets/json/admin/userlist.json";
 import Button from "../../components/botton";
 import FilterDropDown from "../../components/filter-dropdown";
 import TableColumnDropDown from "../../components/table-column-dropdown";

@@ -1,0 +1,22 @@
+.view-user-wrap {
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .view-user-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .close-icon {
+            cursor: pointer;
+        }
+    }
+    .view-user-content {
+    }
+}

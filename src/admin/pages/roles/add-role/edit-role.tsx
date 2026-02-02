@@ -89,7 +89,7 @@ function EditRoleModal(props: AddRoleModalInterface) {
       <div className="add-role-footer">
         <div className="footer-buttons">
           <Button label="Cancel" type="default" onClick={closeModal} />
-          <Button label="Edit Consumer" type="primary" onClick={handleSubmit} />
+          <Button label="Edit User" type="primary" onClick={handleSubmit} />
         </div>
       </div>
     </div>

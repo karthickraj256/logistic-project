@@ -18,6 +18,11 @@ body {
 @import './admin/pages/roles/add-role/style.scss';
 @import './admin/pages/roles/view-role/style.scss';
 
+// users page
+@import './admin/pages/users/style.scss';
+@import './admin/pages/users/add-user/style.scss';
+@import './admin/pages/users/view-user/style.scss';
+
 // consumer page
 @import './admin/pages/consumer/style.scss';
 @import './admin/pages/consumer/add-consumer/style.scss';

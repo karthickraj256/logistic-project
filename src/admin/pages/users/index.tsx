@@ -14,21 +14,21 @@ import {
   ModalContentInterface,
 } from "../../interface/common";
 import {
-  deleteRole,
+  deleteUser,
   setFilterData,
   setViewColumns,
-} from "../../../redux/slice/rolesSlice";
+} from "../../../redux/slice/usersSlice";
 import ModalBox from "../../components/modal-box";
-import AddRoleModal from "./add-role/add-role";
-import EditRoleModal from "./add-role/edit-role";
-import ViewRole from "./view-role/view-role";
+import AddUserModal from "./add-user/add-user";
+import EditUserModal from "./add-user/edit-user";
+import ViewUser from "./view-user/view-user";
 import { setNotification } from "../../../redux/slice/notificationSlice";
 import { exportFile } from "../../../utility/export";
 
-function Roles() {
+function Users() {
   const dispatch = useAppDispatch();
-  const { totalCount, roles, filterData, viewColumns } = useAppSelector(
-    (state) => state.roles
+  const { totalCount, users, filterData, viewColumns } = useAppSelector(
+    (state) => state.users
   );
   const [modalContent, setModalContent] = useState<ModalContentInterface>({
     status: false,
@@ -43,43 +43,43 @@ function Roles() {
     setModalContent({ ...modalContent, status: false });
   };
 
-  const consumerAdd = () => {
+  const userAdd = () => {
     setModalContent({
       status: true,
-      content: <AddRoleModal closeModal={closeModal} />,
-      title: "Add Role",
+      content: <AddUserModal closeModal={closeModal} />,
+      title: "Add User",
       header: true,
     });
   };
 
-  const consumerEdit = (id: string) => {
-    const oldData = roles.find((item) => item.id === id);
+  const userEdit = (id: string) => {
+    const oldData = users.find((item) => item.id === id);
     if (!oldData) return;
     setModalContent({
       status: true,
-      content: <EditRoleModal closeModal={closeModal} oldData={oldData} />,
-      title: "Edit Role",
+      content: <EditUserModal closeModal={closeModal} oldData={oldData} />,
+      title: "Edit User",
       header: true,
     });
   };
 
-  const consumerView = (id: string) => {
-    const oldData = roles.find((item) => item.id === id);
+  const userView = (id: string) => {
+    const oldData = users.find((item) => item.id === id);
     if (!oldData) return;
     setSidePanelContent(
-      <ViewRole
+      <ViewUser
         closeSidebar={() => setSidePanelContent(null)}
         currentConsumer={oldData}
       />
     );
   };
 
-  const consumerDelete = (id: string) => {
-    dispatch(deleteRole(id));
+  const userDelete = (id: string) => {
+    dispatch(deleteUser(id));
     dispatch(
       setNotification({
         notificationStatus: true,
-        message: "Role deleted",
+        message: "User Deleted",
         type: "error",
       })
     );
@@ -89,38 +89,56 @@ function Roles() {
     {
       label: "Edit",
       icon: <EditIcon />,
-      function: consumerEdit,
+      function: userEdit,
     },
     {
       label: "Delete",
       icon: <TrashIcon color="#f00" />,
-      function: consumerDelete,
+      function: userDelete,
     },
   ];
 
   const header = [
     {
-      name: "Role Name",
-      key: "roleName",
+      name: "User Name",
+      key: "name",
       sortable: true,
       Call: (value: any) => (
-        <div>
-          <div className="link-button" onClick={() => consumerView(value.id)}>
-            {value.roleName}
+        <div className="profile-column">
+          <img src={value.profileImage} alt="" />
+          <div className="link-button" onClick={() => userView(value.id)}>
+            {value.name}
           </div>
         </div>
       ),
     },
     {
-      name: "Permissions",
-      key: "permissions",
+      name: "email",
+      key: "email",
       sortable: true,
-      Call: (value: any) => <div>{value.permissions.length} Permissions</div>,
     },
     {
-      name: "Total Users",
-      key: "totalUsers",
+      name: "Phone Number",
+      key: "phoneNumber",
       sortable: true,
+    },
+    {
+      name: "Address",
+      key: "address",
+      sortable: true,
+    },
+    {
+      name: "Salary Amount",
+      key: "salary",
+      sortable: true,
+    },
+    {
+      name: "Role",
+      key: "role",
+      sortable: true,
+      Call: (value: any) => (
+        <div>{value.roleName}</div>
+      )
     },
     {
       name: "Action",
@@ -141,12 +159,20 @@ function Roles() {
   };
 
   const toExportFile = (key: string) => {
-    const exportData = roles.map((data) => ({
-      "Role Name": data.roleName,
-      Permissions: data.permissions.join(", "),
-      "Total Users": data.totalUsers,
+    const exportData = users.map((data) => ({
+      "User Name": data.name, 
+      "Email": data.email, 
+      "Phone Number": data.phoneNumber, 
+      "Address": data.address, 
+      "status": data.status ? 'Active' : 'Inactive', 
+      "Role": data.role,
+      "Account Number": data.accountDetails.accountNumber,
+      "Salary": data.salary,
+      "Bank Name": data.accountDetails.bankName,
+      "Branch Name": data.accountDetails.branch,
+      "IFSC Number": data.accountDetails.ifcNumber,
     }));
-    exportFile(exportData, key, "role");
+    exportFile(exportData, key, "users");
   };
 
   useEffect(() => {
@@ -154,7 +180,7 @@ function Roles() {
   }, []);
 
   return (
-    <div className="roles-wrap">
+    <div className="users-wrap">
       <ModalBox
         openStatus={modalContent.status}
         content={modalContent.content}
@@ -162,15 +188,15 @@ function Roles() {
         header={modalContent.header}
         closeFunction={closeModal}
       />
-      <div className="roles-header">
+      <div className="users-header">
         <div className="header-left">
-          <HeaderTitle title="Roles" />
+          <HeaderTitle title="Users" />
         </div>
         <div className="header-right">
-          Total Roles: <b>{totalCount}</b>
+          Total Users: <b>{totalCount}</b>
         </div>
       </div>
-      <div className="roles-body white-box">
+      <div className="users-body white-box">
         <div className="more-options">
           <div className="left-options flax-wrap">
             <FilterDropDown
@@ -194,14 +220,14 @@ function Roles() {
               label="Add"
               icon={<UserAdd color="#ffffff" />}
               type="primary"
-              onClick={consumerAdd}
+              onClick={userAdd}
             />
           </div>
         </div>
         <div className="full-table">
           <DataTable
             header={header}
-            values={roles}
+            values={users}
             filterOptions={filterData}
             setFilterData={handleFilterData}
             sidePanel={sidePanelContent}
@@ -213,4 +239,4 @@ function Roles() {
   );
 }
 
-export default Roles;
+export default Users;

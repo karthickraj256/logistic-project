@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import consumerReducer from './slice/consumerSlice'
 import rolesReducer from './slice/rolesSlice'
 import notificationReducer from './slice/notificationSlice'
+import usersReducer from './slice/usersSlice'
 
 export const store = configureStore({
   reducer: {
     consumer: consumerReducer,
     roles: rolesReducer,
     notification: notificationReducer,
+    users: usersReducer,
   }
 })
 
